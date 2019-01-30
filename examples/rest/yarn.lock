@@ -553,11 +553,11 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@huddly/device-api-usb@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@huddly/device-api-usb/-/device-api-usb-0.1.2.tgz#41a4ff75b6414d33a59eed104d8c7e4c6d866bd2"
+"@huddly/device-api-usb@^0.1.5":
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/@huddly/device-api-usb/-/device-api-usb-0.1.5.tgz#f159ece73cfa4f85ef07b5d9283663645e1360e8"
   dependencies:
-    "@huddly/sdk" "^0.1.0"
+    "@huddly/sdk" "^0.1.5"
     "@types/node" "^10.12.12"
     global "^4.3.2"
     msgpack-lite "^0.1.26"
@@ -565,9 +565,34 @@
     typescript "^3.2.1"
     usb "https://huddlysoftware.blob.core.windows.net/node-usb/nodeusb-prod-1.5.3.tar.gz"
 
-"@huddly/sdk@^0.1.0", "@huddly/sdk@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@huddly/sdk/-/sdk-0.1.2.tgz#6c3d311d144d27f4e4a39c6590b0bd781dea2ee5"
+"@huddly/device-api-uvc@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@huddly/device-api-uvc/-/device-api-uvc-0.0.3.tgz#12d55d0d13cbf3469d8dab196edd0f0650448333"
+  dependencies:
+    "@huddly/sdk" "^0.0.3"
+    "@types/node" "^10.12.12"
+    global "^4.3.2"
+    msgpack-lite "^0.1.26"
+    node-hid "https://huddlysoftware.blob.core.windows.net/node-hid/HID-prod-0.6.5.tar.gz"
+    node-uvc "https://huddlysoftware.blob.core.windows.net/node-uvc/nodeuvc-prod-1.1.3.tar.gz"
+    p-queue "^3.0.0"
+    typescript "^3.2.1"
+
+"@huddly/sdk@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@huddly/sdk/-/sdk-0.0.3.tgz#6975935f93de53b6a22560230ad199685e88a699"
+  dependencies:
+    "@types/node" "^10.12.12"
+    jszip "^3.1.5"
+    msgpack-lite "^0.1.26"
+    node-fetch "^2.3.0"
+    p-queue "^3.0.0"
+    semver "^5.6.0"
+    typescript "^3.2.1"
+
+"@huddly/sdk@^0.1.11", "@huddly/sdk@^0.1.5":
+  version "0.1.11"
+  resolved "https://registry.yarnpkg.com/@huddly/sdk/-/sdk-0.1.11.tgz#baab6eaddbf4e10c20d996adabec69bad1ac6371"
   dependencies:
     "@types/node" "^10.12.12"
     axios "^0.18.0"
@@ -3589,9 +3614,19 @@ negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
 
+node-fetch@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.3.0.tgz#1a1d940bbfb916a1d3e0219f037e89e71f8c5fa5"
+
 node-gyp-build@^3.4.0:
   version "3.7.0"
   resolved "https://registry.yarnpkg.com/node-gyp-build/-/node-gyp-build-3.7.0.tgz#daa77a4f547b9aed3e2aac779eaf151afd60ec8d"
+
+"node-hid@https://huddlysoftware.blob.core.windows.net/node-hid/HID-prod-0.6.5.tar.gz":
+  version "0.6.5"
+  resolved "https://huddlysoftware.blob.core.windows.net/node-hid/HID-prod-0.6.5.tar.gz#1bf3b95b15f947e7a56e4307da43b9eb0ce5b678"
+  dependencies:
+    node-gyp-build "^3.4.0"
 
 node-int64@^0.4.0:
   version "0.4.0"
@@ -3630,6 +3665,12 @@ node-releases@^1.1.3:
   resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.1.3.tgz#aad9ce0dcb98129c753f772c0aa01360fb90fbd2"
   dependencies:
     semver "^5.3.0"
+
+"node-uvc@https://huddlysoftware.blob.core.windows.net/node-uvc/nodeuvc-prod-1.1.3.tar.gz":
+  version "1.1.3"
+  resolved "https://huddlysoftware.blob.core.windows.net/node-uvc/nodeuvc-prod-1.1.3.tar.gz#9aef79f26efb0147a492cc5f624b514efd48fdfd"
+  dependencies:
+    node-gyp-build "^3.4.0"
 
 nodemon@^1.18.4:
   version "1.18.9"

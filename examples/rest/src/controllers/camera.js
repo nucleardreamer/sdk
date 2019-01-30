@@ -1,12 +1,14 @@
 import HuddlyDeviceAPIUSB from '@huddly/device-api-usb';
+import HuddlyDeviceAPIUVC from '@huddly/device-api-uvc';
 import HuddlySdk from '@huddly/sdk';
 
 // Initialize the SDK
 // Create instances of device-apis you want to use
 const usbApi = new HuddlyDeviceAPIUSB();
+const uvcApi = new HuddlyDeviceAPIUVC();
 
 // Create an instance of the SDK
-const sdk = new HuddlySdk(usbApi);
+const sdk = new HuddlySdk(uvcApi, [usbApi, uvcApi]);
 
 let cameraManager;
 // Setup Attach/Detach Events
@@ -42,6 +44,38 @@ async function getInfo() {
   }
 }
 
+async function reboot() {
+  if (cameraManager) {
+    await cameraManager.reboot();
+    return { "message": 'Camera Rebooted!' };
+  } else {
+    return { "error": 'Camera manager not initialized' };
+  }
+}
+
+async function setParam(name, value) {
+  if (cameraManager) {
+    await cameraManager.setUVCParam(name, value);
+    return { "message": `New ${name} level ${value} set!` };
+  } else {
+    return { "error": 'Camera manager not initialized' };
+  }
+}
+
+
+/*
+GeniusFraming Start:  POST http://192.168.128.50:8080/geniusframing/start ,   Body: "" ,                                        Range: [1000, 4000]
+GeniusFraming Stop:   POST http://192.168.128.50:8080/geniusframing/stop ,    Body: "" ,                                        Range: [1000, 4000]
+Reboot:               POST http://192.168.128.50:8080/reboot ,                Body: "" ,                                        Range: [1000, 4000]
+PanTilt:              POST http://192.168.128.50:8080/panTilt ,               Body: { "pan": 216000, "tilt": 162000 } ,         Range: Pan [216000, -216000], Tilt Pan [162000, -162000]
+Zoom:                 POST http://192.168.128.50:8080/zoom ,                  Body: { "zoom": 1500 } ,                          Range: [1000, 4000]
+Saturation:           POST http://192.168.128.50:8080/saturation ,            Body: { "saturation": 120 } ,                     Range: [1, 255]
+Brightness:           POST http://192.168.128.50:8080/brightness ,            Body: { "brightness": 300 } ,                     Range: [-600, 600]
+*/
+
+
+
+
 let detector;
 let detectorObj = {};
 let frame = {};
@@ -66,8 +100,8 @@ async function startAutozoom() {
   if (detector) {
     try {
       detector.start();
-      setupDetectionListener();
-      setupFramerListener();
+      // setupDetectionListener();
+      // setupFramerListener();
       return { "status": "Autozoom started!" };
     } catch (e) {
       return { "error": e };
@@ -134,4 +168,6 @@ module.exports = {
   detect,
   upgrade,
   getUpgradeStatus,
+  reboot,
+  setParam
 };
