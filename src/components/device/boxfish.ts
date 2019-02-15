@@ -12,6 +12,7 @@ import CameraEvents from './../../utilitis/events';
 import Detector from './../detector';
 import { EventEmitter } from 'events';
 import { createBoxfishUpgrader } from './../upgrader/boxfishUpgraderFactory';
+import HPKUpgrader from '../upgrader/hpkUpgrader';
 
 const MAX_UPGRADE_ATTEMT = 3;
 export default class Boxfish extends UvcBaseDevice implements IDeviceManager {
@@ -169,5 +170,10 @@ export default class Boxfish extends UvcBaseDevice implements IDeviceManager {
       }
     );
     return response;
+  }
+
+  async hpk_upload(fileBuffer: any): Promise<any> {
+    const hpkUpgrader = new HPKUpgrader(this, this.discoveryEmitter, this.logger);
+    return hpkUpgrader.upload(fileBuffer);
   }
 }

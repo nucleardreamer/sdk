@@ -255,4 +255,8 @@ export default class HuddlyGo extends UvcBaseDevice implements IDeviceManager {
   getState(): Promise<any> {
     throw new Error('State is not supported on Huddly GO camera');
   }
+
+  hpk_upload(fileBuffer: any): Promise<any> {
+    throw new Error('hpk_upload is not supported on Huddly GO camera');
+  }
 }

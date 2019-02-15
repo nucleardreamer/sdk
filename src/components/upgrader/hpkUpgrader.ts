@@ -78,6 +78,9 @@ export default class HPKUpgrader extends EventEmitter implements IDeviceUpgrader
       } catch (e) {
         this._logger.error(`Failed uploading hpk file ${e} attemt ${attempt}`);
         attempt += 1;
+        if (attempt === MAX_UPLOAD_ATTEMPTS) {
+          throw new Error('Reached the maximum number of retries! ERROR!');
+        }
       }
     }
   }
