@@ -103,7 +103,11 @@ class HuddlySdk extends EventEmitter {
    * @param {SDKOpts} [opts] Options used for initializing the sdk. See `SDKOpts` interface.
    * @memberof HuddlySdk
    */
-  constructor(deviceDiscoveryApi: IHuddlyDeviceAPI, deviceApis?: Array<IHuddlyDeviceAPI>, opts?: SDKOpts) {
+  constructor(
+    deviceDiscoveryApi: IHuddlyDeviceAPI,
+    deviceApis?: Array<IHuddlyDeviceAPI>,
+    opts?: SDKOpts
+  ) {
     super();
     if (!deviceDiscoveryApi) {
       throw new Error('A default device api should be provided to the sdk!');
@@ -139,23 +143,35 @@ class HuddlySdk extends EventEmitter {
    * @memberof HuddlySdk
    */
   setupDeviceDiscoveryListeners(): void {
-    this.deviceDiscovery.on(CameraEvents.ATTACH, async (d) => {
+    this.deviceDiscovery.on(CameraEvents.ATTACH, async d => {
       if (d) {
-        await this.locksmith.executeAsyncFunction(() => new Promise(async (resolve) => {
-          const cameraManager = await DeviceFactory.getDevice(d.productId,
-            this.logger, this.mainDeviceApi, this.deviceApis, d, this.emitter);
-          this.emitter.emit(CameraEvents.ATTACH, cameraManager);
-          resolve();
-        }));
+        await this.locksmith.executeAsyncFunction(
+          () =>
+            new Promise(async resolve => {
+              const cameraManager = await DeviceFactory.getDevice(
+                d.productId,
+                this.logger,
+                this.mainDeviceApi,
+                this.deviceApis,
+                d,
+                this.emitter
+              );
+              this.emitter.emit(CameraEvents.ATTACH, cameraManager);
+              resolve();
+            })
+        );
       }
     });
 
-    this.deviceDiscovery.on(CameraEvents.DETACH, async (d) => {
+    this.deviceDiscovery.on(CameraEvents.DETACH, async d => {
       if (d) {
-        await this.locksmith.executeAsyncFunction(() => new Promise((resolve) => {
-          this.emitter.emit(CameraEvents.DETACH, d);
-          resolve();
-        }));
+        await this.locksmith.executeAsyncFunction(
+          () =>
+            new Promise(resolve => {
+              this.emitter.emit(CameraEvents.DETACH, d);
+              resolve();
+            })
+        );
       }
     });
   }
